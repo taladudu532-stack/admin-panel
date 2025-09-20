@@ -1,0 +1,8 @@
+export function loadClassicGames() {
+  const container = document.createElement("div");
+  container.innerHTML = `
+    <h2>🎮 ألعاب كلاسيكية</h2>
+    <p>هنا سيتم عرض الألعاب التقليدية مثل XO وورق اللعب.</p>
+  `;
+  document.body.appendChild(container);
+}

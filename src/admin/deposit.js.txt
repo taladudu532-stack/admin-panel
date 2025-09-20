@@ -1,0 +1,7 @@
+import { db } from "../utils/firebase.js";
+import { doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+export async function depositCoins(userId, amount) {
+  const userRef = doc(db, "users", userId);
+  await updateDoc(userRef, { coins: increment(amount) });
+}

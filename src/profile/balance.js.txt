@@ -1,0 +1,8 @@
+import { db } from "../utils/firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+export async function showBalance(userId) {
+const userRef = doc(db, "users", userId);
+const snapshot = await getDoc(userRef);
+alert(`رصيدك: ${snapshot.data().coins} عملة`);
+}

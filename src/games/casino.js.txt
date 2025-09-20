@@ -1,0 +1,8 @@
+export function loadCasinoGames() {
+  const container = document.createElement("div");
+  container.innerHTML = `
+    <h2>🎰 كازينو</h2>
+    <p>هنا سيتم عرض ألعاب الكازينو مثل الروليت والبوكر.</p>
+  `;
+  document.body.appendChild(container);
+}

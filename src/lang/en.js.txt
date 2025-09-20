@@ -1,0 +1,11 @@
+export const labels = {
+  welcome: "Welcome",
+  login: "Login",
+  logout: "Logout",
+  balance: "Your Balance",
+  deposit: "Deposit",
+  withdraw: "Withdraw",
+  sports: "Sports Games",
+  casino: "Casino",
+  classic: "Classic Games"
+};

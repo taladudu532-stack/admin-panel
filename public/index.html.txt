@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>منصة تالا</title>
+  <style>
+    body { font-family: 'Arial'; background: #f5f5f5; text-align: center; direction: rtl; }
+    .container { margin-top: 50px; }
+    button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 أهلاً بك في منصة تالا</h1>
+    <button onclick="login()">تسجيل الدخول</button>
+    <button onclick="logout()">تسجيل الخروج</button>
+    <p id="user-info"></p>
+  </div>
+  <script src="/src/utils/firebase.js"></script>
+  <script src="/src/auth/login.js"></script>
+  <script src="/src/auth/logout.js"></script>
+</body>
+</html>

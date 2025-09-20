@@ -1,0 +1,11 @@
+export const labels = {
+  welcome: "مرحباً بك",
+  login: "تسجيل الدخول",
+  logout: "تسجيل الخروج",
+  balance: "رصيدك",
+  deposit: "إيداع",
+  withdraw: "سحب",
+  sports: "ألعاب رياضية",
+  casino: "كازينو",
+  classic: "ألعاب كلاسيكية"
+};

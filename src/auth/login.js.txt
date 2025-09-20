@@ -1,0 +1,12 @@
+import { auth } from "../utils/firebase.js";
+import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+
+window.login = function () {
+  const email = prompt("أدخل البريد الإلكتروني");
+  const password = prompt("أدخل كلمة المرور");
+  signInWithEmailAndPassword(auth, email, password)
+    .then(user => {
+      document.getElementById("user-info").innerText = `مرحباً، ${user.user.email}`;
+    })
+    .catch(err => alert("فشل تسجيل الدخول"));
+};
