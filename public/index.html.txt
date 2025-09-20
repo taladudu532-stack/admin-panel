@@ -3,16 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة تحكم تالا</title>
+  <title>منصة تالا لإدارة الرهانات</title>
   <style>
-    body { font-family: 'Arial'; background: #f5f5f5; text-align: center; direction: rtl; }
-    .container { margin-top: 50px; }
-    button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom, #f0f0f0, #dcdcdc);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      direction: rtl;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px 0;
+      font-size: 24px;
+    }
+    .container {
+      margin-top: 40px;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    footer {
+      margin-top: 60px;
+      font-size: 14px;
+      color: #777;
+    }
   </style>
 </head>
 <body>
+  <header>🎮 أهلاً بك في منصة تالا لإدارة الرهانات</header>
+
   <div class="container">
-    <h1>🎮 أهلاً بك في منصة تالا لإدارة الرهانات</h1>
     <button onclick="login()">🔐 تسجيل الدخول</button>
     <button onclick="logout()">🚪 تسجيل الخروج</button>
     <button onclick="showBalance('USER_ID')">💰 عرض الرصيد</button>
@@ -20,14 +54,57 @@
     <button onclick="loadCasinoGames()">🎰 كازينو</button>
     <button onclick="loadClassicGames()">🎮 كلاسيك</button>
   </div>
+
   <p id="user-info"></p>
 
-  <script src="/src/utils/firebase.js" type="module"></script>
-  <script src="/src/auth/login.js" type="module"></script>
-  <script src="/src/auth/logout.js" type="module"></script>
-  <script src="/src/profile/balance.js" type="module"></script>
-  <script src="/src/games/sports.js" type="module"></script>
-  <script src="/src/games/casino.js" type="module"></script>
-  <script src="/src/games/classic.js" type="module"></script>
+  <footer>© 2025 تالا بت - جميع الحقوق محفوظة</footer>
+
+  <script type="module">
+    import { auth, db } from "/src/utils/firebase.js";
+    import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+    window.login = async function () {
+      const email = prompt("أدخل البريد الإلكتروني");
+      const password = prompt("أدخل كلمة المرور");
+      try {
+        const user = await signInWithEmailAndPassword(auth, email, password);
+        document.getElementById("user-info").innerText = `مرحباً، ${user.user.email}`;
+      } catch (err) {
+        alert("فشل تسجيل الدخول");
+      }
+    };
+
+    window.logout = async function () {
+      try {
+        await signOut(auth);
+        document.getElementById("user-info").innerText = "تم تسجيل الخروج";
+      } catch (err) {
+        alert("فشل تسجيل الخروج");
+      }
+    };
+
+    window.showBalance = async function (userId) {
+      try {
+        const userRef = doc(db, "users", userId);
+        const snapshot = await getDoc(userRef);
+        alert(`رصيدك: ${snapshot.data().coins} عملة`);
+      } catch (err) {
+        alert("تعذر جلب الرصيد");
+      }
+    };
+
+    window.loadSportsGames = function () {
+      alert("🏆 سيتم عرض الألعاب الرياضية هنا");
+    };
+
+    window.loadCasinoGames = function () {
+      alert("🎰 سيتم عرض ألعاب الكازينو هنا");
+    };
+
+    window.loadClassicGames = function () {
+      alert("🎮 سيتم عرض الألعاب الكلاسيكية هنا");
+    };
+  </script>
 </body>
 </html>

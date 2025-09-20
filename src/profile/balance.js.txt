@@ -1,8 +1,16 @@
-import { db } from "../utils/firebase.js";
+import { db } from "/src/utils/firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
 
 window.showBalance = async function (userId) {
-  const userRef = doc(db, "users", userId);
-  const snapshot = await getDoc(userRef);
-  alert(`رصيدك: ${snapshot.data().coins} عملة`);
+  try {
+    const userRef = doc(db, "users", userId);
+    const snapshot = await getDoc(userRef);
+    if (snapshot.exists()) {
+      alert(`رصيدك: ${snapshot.data().coins} عملة`);
+    } else {
+      alert("المستخدم غير موجود");
+    }
+  } catch (error) {
+    alert("حدث خطأ أثناء جلب الرصيد");
+  }
 };

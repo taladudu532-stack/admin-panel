@@ -2,7 +2,11 @@ window.loadClassicGames = function () {
   const container = document.createElement("div");
   container.innerHTML = `
     <h2>🎮 ألعاب كلاسيكية</h2>
-    <p>هنا سيتم عرض الألعاب التقليدية مثل XO وورق اللعب.</p>
+    <ul>
+      <li>XO</li>
+      <li>ورق اللعب</li>
+      <li>لعبة الحظ</li>
+    </ul>
   `;
   document.body.appendChild(container);
 };
