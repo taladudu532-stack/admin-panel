@@ -60,9 +60,22 @@
   <footer>© 2025 تالا بت - جميع الحقوق محفوظة</footer>
 
   <script type="module">
-    import { auth, db } from "/src/utils/firebase.js";
-    import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "talabet-89fce.firebaseapp.com",
+      projectId: "talabet-89fce",
+      storageBucket: "talabet-89fce.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
     window.login = async function () {
       const email = prompt("أدخل البريد الإلكتروني");
@@ -88,7 +101,11 @@
       try {
         const userRef = doc(db, "users", userId);
         const snapshot = await getDoc(userRef);
-        alert(`رصيدك: ${snapshot.data().coins} عملة`);
+        if (snapshot.exists()) {
+          alert(`رصيدك: ${snapshot.data().coins} عملة`);
+        } else {
+          alert("المستخدم غير موجود");
+        }
       } catch (err) {
         alert("تعذر جلب الرصيد");
       }
